@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+class ArticleContainer extends Component {
   render() {
     return (
       <div>
-        <h1>Antarctic News</h1>
+        <h1>Article View</h1>
       </div>
     );
   }
 }
 
-module.exports = App;
+module.exports = ArticleContainer;
