@@ -1,0 +1,11 @@
+# Packages / Compiled code to ignore
+node_modules
+public/bundle.js
+public/bundle.js.map
+
+# npm Error Logging
+npm-debug.log
+
+# Common OS generated files
+.DS_Store
+Thumbs.db
