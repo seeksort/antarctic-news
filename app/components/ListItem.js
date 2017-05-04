@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 
 const ListItem = props => (
   <div>
-    <h2>{props.title}</h2>
-    <p>{props.date}</p>
+    <a className='article' href='#'>
+      <h4>{props.title}</h4>
+      <p>{props.date}</p>
+      <hr />
+    </a>
   </div>
 );
 

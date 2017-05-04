@@ -1,4 +1,15 @@
-h1: {
+body {
   font-family: 'Lato', sans-serif;
-  color: blue;
+  color: #4C4154;
+  background-color: #E6E5EA
+}
+
+.article {
+  color: #4C4154;
+}
+
+.article:active,
+.article:hover,
+.article:focus {
+  color: #007991;
 }

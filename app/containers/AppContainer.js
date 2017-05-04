@@ -8,19 +8,19 @@ import EditArticleContainer from './EditArticleContainer';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="container">
           <h1>Antarctic News</h1>
           <Switch>
-            <Route path='/' component={ListArticlesContainer} />
-            <Route path='/article' component={ArticleContainer} />
-            <Route exact path='/edit' component={EditArticleContainer} />
+            <Route exact path="/" component={ListArticlesContainer} />
+            <Route path="/article" component={ArticleContainer} />
+            <Route path="/edit" component={EditArticleContainer} />
             <Route render={() => <h1>404 Page Not Found.</h1>} />
           </Switch>
         </div>
