@@ -15,7 +15,6 @@ mongoose.Promise = Promise;
 // GET articles
 router.get('/articles', (req, res) => {
   Article.find({}, (err, articles) => {
-    console.log(articles)
     if (err) {
       console.log(err);
       res.sendStatus(404);

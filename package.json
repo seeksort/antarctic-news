@@ -24,6 +24,7 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "moment-timezone": "^0.5.13",
     "mongoose": "^4.9.7",
     "morgan": "^1.8.1",
     "prop-types": "^15.5.8",
