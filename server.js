@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes/api');
-const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,8 +9,6 @@ const PORT = process.env.PORT || 3000;
 // Activate logging, access public files, incorporate JSON body parser
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
 
 // Catch errors
 app.use('/', (err, req, res, next) => {
