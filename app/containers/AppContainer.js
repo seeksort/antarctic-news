@@ -23,6 +23,6 @@ const App = () => (
       </Switch>
     </div>
   </Router>
-)
+);
 
 module.exports = App;
