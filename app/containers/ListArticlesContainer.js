@@ -32,7 +32,7 @@ class ListArticlesContainer extends Component {
           to={{
             pathname: `/article`,
             search: `?id=${repo._id}`
-          }}>
+        }}>
           <ListItem
             key={`item-${index}`}
             id={repo._id}
