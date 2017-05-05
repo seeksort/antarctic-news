@@ -14,10 +14,10 @@ import {
 const App = () => (
   <Router>
     <div className="container">
-      <h1 style={{"color":"#007087", "fontWeight": "bold"}}>Antarctic News</h1>
+      <h1 style={{"color":"#007896", "fontWeight": "bold"}}>Antarctic News</h1>
       <Switch>
         <Route exact path="/" component={ListArticlesContainer} />
-        <Route path="/article" component={ArticleContainer} />
+        <Route exact path="/article" component={ArticleContainer} />
         <Route path="/edit" component={EditArticleContainer} />
         <Route render={() => <h1>404 Page Not Found.</h1>} />
       </Switch>
