@@ -19,10 +19,10 @@ module.exports = (app) => {
       mongoose.connect(databaseUri);
   }
 
-  // Seed the database
-  Article.remove()
-  .then(Article.create(articles, (err, res) => {
-    if (err) return console.error(err);
-  }));
+  // Seed the database - Removed for heroku deploy
+  // Article.remove()
+  // .then(Article.create(articles, (err, res) => {
+  //   if (err) return console.error(err);
+  // }));
 
 }
