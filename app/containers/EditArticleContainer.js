@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from './../components/Button';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class EditArticleContainer extends Component {
@@ -7,8 +7,8 @@ class EditArticleContainer extends Component {
     super(props);
 
     this.state = {
-      title: this.props.title,
-      body: this.props.body,
+      title: this.props.title || '',
+      body: this.props.body || '',
       edit: false
     }
     this.handleChange = this.handleChange.bind(this);
@@ -27,40 +27,58 @@ class EditArticleContainer extends Component {
       title: this.state.title,
       body: this.state.body
     };
-    console.log(this.props.articleId)
-    axios.put(`/article/${this.props.articleId.id}`, obj)
-    .then((res) => {
-      alert(res.data.message);
+
+    if (this.props.title === undefined) {
+      axios.post('/new-article', obj)
+      .then((res) => {
+        alert(res.data.message);
+        return 'done';
+      })
+      .catch(error => console.log(error));
+    } else if (this.props.title !== null) {
+      axios.put(`/article/${this.props.articleId.id}`, obj)
+      .then((res) => {
+        alert(res.data.message);
+        return 'done';
+      })
+      .catch(error => console.log(error));
+    } else {
+      alert('An error occurred.')
       return 'done';
-    })
-    .catch(error => console.log(error));
+    }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label className='header' htmlFor='editor'>Article Editor</label>
-        <input 
-          id='title'
-          type='text'
-          autoComplete='off'
-          defaultValue={this.props.title}
-          onChange={this.handleChange}
-        />
-        <textarea 
-          id='body'
-          rows='15'
-          cols='50'
-          defaultValue={this.props.body}
-          style={{height:'200px'}}
-          onChange={this.handleChange}
-        />
-        <button
-          className='button'
-          type='submit'>
-          Submit
-        </button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label className='header' htmlFor='editor'>Article Editor</label>
+          <input 
+            id='title'
+            type='text'
+            autoComplete='off'
+            defaultValue={this.props.title || 'Article Title'}
+            onChange={this.handleChange || ''}
+          />
+          <textarea 
+            id='body'
+            rows='15'
+            cols='50'
+            defaultValue={this.props.body || 'Add your article...'}
+            style={{height:'200px'}}
+            onChange={this.handleChange}
+          />
+          <button
+            className='button'
+            type='submit'>
+            Submit
+          </button>
+        </form>
+        <br/><br/>
+        <Link className='waves-effect waves-light btn' to='/'>
+          Back to Articles
+        </Link>
+      </div>
     );
   }
 }

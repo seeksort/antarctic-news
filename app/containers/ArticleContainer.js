@@ -69,6 +69,7 @@ class ArticleContainer extends Component {
               articleId={queryString.parse(this.props.location.search)}
               title={this.state.title}
               body={this.state.body}
+              action='edit'
             />
           : <br />
         }
