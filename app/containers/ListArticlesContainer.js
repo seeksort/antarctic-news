@@ -28,19 +28,19 @@ class ListArticlesContainer extends Component {
         </Link>
         {! this.state.articles
           ? <p>Loading...</p>
-          : this.state.articles.map((repo, index) => (
+          : this.state.articles.map((article, index) => (
           <Link 
             key={`link-${index}`}
             className='article' 
             to={{
               pathname: `/article`,
-              search: `?id=${repo._id}`
+              search: `?id=${article._id}`
           }}>
             <ListItem
               key={`item-${index}`}
-              id={repo._id}
-              title={repo.title}
-              date={moment.tz(repo.last_edit_date, 'America/Chicago').format('llll z')}
+              id={article._id}
+              title={article.title}
+              date={moment.tz(article.last_edit_date, 'America/Chicago').format('llll z')}
             />  
           </Link>
         ))}
