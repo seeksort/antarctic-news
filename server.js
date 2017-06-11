@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // Activate logging, access public files, incorporate JSON body parser
 app.use(morgan('dev'));
-app.use(express.static('public')) 
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Catch errors
 app.use('/', (err, req, res, next) => {
