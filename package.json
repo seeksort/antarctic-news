@@ -11,7 +11,9 @@
     "start": "node server.js",
     "build": "NODE_ENV='production' webpack -p",
     "watch": "webpack -w",
-    "test": "jest"
+    "test": "jest",
+    "compile": "webpack",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
