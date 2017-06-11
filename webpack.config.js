@@ -11,6 +11,9 @@ module.exports = {
   devtool: "source-map",
   context: __dirname,
   resolve: {
+    root: [
+        path.join(__dirname, 'node_modules'),
+    ],
     extensions: ['.js', '.jsx']
   },
   module: {

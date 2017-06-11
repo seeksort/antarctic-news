@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 // Activate logging, access public files, incorporate JSON body parser
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname + '/public')));
 
 // Catch errors
 app.use('/', (err, req, res, next) => {
@@ -16,8 +16,8 @@ app.use('/', (err, req, res, next) => {
 });
 
 // Default Route
-router.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+router.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Routes
