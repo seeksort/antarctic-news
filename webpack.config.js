@@ -5,14 +5,11 @@ module.exports = {
   entry: './app/indexapp.js',
   output: {
     path: __dirname,
-    filename: ".public/bundle.js"
+    filename: "./public/bundle.js"
   },
   devtool: "source-map",
   context: __dirname,
   resolve: {
-    root: [
-        path.join(__dirname, 'node_modules'),
-    ],
     extensions: ['.js', '.jsx']
   },
   module: {
