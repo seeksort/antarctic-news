@@ -4,9 +4,8 @@ const webpack = require('webpack');
 module.exports = {
   entry: './app/indexapp.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/public/'
+    path: __dirname,
+    filename: ".public/bundle.js"
   },
   devtool: "source-map",
   context: __dirname,
