@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ListItem = props => (
-  <div className='article'>
-   <div>
+  <div className="article">
+    <div>
       <h4>{props.title}</h4>
       <p>{props.date}</p>
       <hr />
