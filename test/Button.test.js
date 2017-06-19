@@ -17,7 +17,7 @@ describe('<Button />', () => {
 
   test('renders default color if no color prop', () => {
     const component = shallow(<Button onClick={() => ''} />);
-    expect(component.get(0).props.style).toHaveProperty('backgroundColor', '#1565c');
+    expect(component.get(0).props.style).toHaveProperty('backgroundColor', '#1565c0');
   });
 
   test('renders color if passed as prop', () => {
