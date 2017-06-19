@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Button = (props) => (
-    <button className='waves-effect waves-light btn' style={{backgroundColor: props.color, margin: '2px'}} onClick={props.onClick}>
-      {props.text}
-    </button>
+const Button = props => (
+  <button className="waves-effect waves-light btn" style={{ backgroundColor: props.color, margin: '2px' }} onClick={props.onClick}>
+    {props.text}
+  </button>
 );
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 Button.defaultProps = {
