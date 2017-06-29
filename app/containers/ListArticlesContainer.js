@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import moment from 'moment-timezone';
+import moment from 'moment';
 import ListItem from './../components/ListItem';
 
 class ListArticlesContainer extends Component {
@@ -38,7 +38,7 @@ class ListArticlesContainer extends Component {
                 key={`item-${article._id}`}
                 id={article._id}
                 title={article.title}
-                date={moment.tz(article.last_edit_date, 'America/Chicago').format('llll z')}
+                date={moment(article.last_edit_date).format('llll z')}
               />
             </Link>
         ))}

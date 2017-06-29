@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import axios from 'axios';
-import moment from 'moment-timezone';
+import moment from 'moment';
 import Button from './../components/Button';
 import EditArticleContainer from './EditArticleContainer';
 
@@ -55,8 +55,8 @@ class ArticleContainer extends Component {
       <div>
         <div>
           <h3>{this.state.title}</h3>
-          <h5>Original article date: {moment.tz(this.state.create_date, 'America/Chicago').format('llll z')}</h5>
-          <h5>Last updated: {moment.tz(this.state.last_edit_date, 'America/Chicago').format('llll z')}</h5>
+          <h5>Original article date: {moment(this.state.create_date).format('llll z')}</h5>
+          <h5>Last updated: {moment(this.state.last_edit_date).format('llll z')}</h5>
           <p style={{ whiteSpace: 'pre-wrap' }}>{this.state.body}</p>
         </div>
         <div>
