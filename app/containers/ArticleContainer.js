@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from './../components/Button';
-import EditArticleContainer from './EditArticleContainer';
 import queryString from 'query-string';
-import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment-timezone';
+import Button from './../components/Button';
+import EditArticleContainer from './EditArticleContainer';
 
 class ArticleContainer extends Component {
   constructor(props) {
@@ -16,8 +15,8 @@ class ArticleContainer extends Component {
       body: null,
       create_date: null,
       last_edit_date: null,
-      editing_mode: false
-    }
+      editing_mode: false,
+    };
     this.delete = this.delete.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
   }
@@ -30,9 +29,9 @@ class ArticleContainer extends Component {
       title: res.title,
       body: res.body,
       create_date: res.create_date,
-      last_edit_date: res.last_edit_date
+      last_edit_date: res.last_edit_date,
     }))
-    .catch(error => console.log(error));
+    .catch(error => new Error(error));
   }
 
   delete() {
@@ -43,12 +42,12 @@ class ArticleContainer extends Component {
         alert(res.data.message);
         return 'done';
       })
-      .catch(error => console.log(error));
+      .catch(error => new Error(error));
     }
   }
 
-  toggleEditMode(){
-    this.setState({editing_mode: !this.state.editing_mode})
+  toggleEditMode() {
+    this.setState({ editing_mode: !this.state.editing_mode });
   }
 
   render() {
@@ -58,24 +57,30 @@ class ArticleContainer extends Component {
           <h3>{this.state.title}</h3>
           <h5>Original article date: {moment.tz(this.state.create_date, 'America/Chicago').format('llll z')}</h5>
           <h5>Last updated: {moment.tz(this.state.last_edit_date, 'America/Chicago').format('llll z')}</h5>
-          <p style={{whiteSpace: 'pre-wrap'}}>{this.state.body}</p>
+          <p style={{ whiteSpace: 'pre-wrap' }}>{this.state.body}</p>
         </div>
         <div>
-          <Button text='Edit' onClick={this.toggleEditMode}/>
-          <Button text='Delete' color='#d32f2f' onClick={this.delete}/>
+          <Button text="Edit" onClick={this.toggleEditMode} />
+          <Button text="Delete" color="#d32f2f" onClick={this.delete} />
         </div>
         {this.state.editing_mode
-          ? <EditArticleContainer 
-              articleId={queryString.parse(this.props.location.search)}
-              title={this.state.title}
-              body={this.state.body}
-              action='edit'
-            />
+          ? <EditArticleContainer
+            articleId={queryString.parse(this.props.location.search)}
+            title={this.state.title}
+            body={this.state.body}
+            action="edit"
+          />
           : <br />
         }
       </div>
     );
   }
 }
+
+ArticleContainer.propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 module.exports = ArticleContainer;
