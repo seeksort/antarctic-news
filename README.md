@@ -1,5 +1,7 @@
 # Antarctic News
 
+[![Build Status](https://travis-ci.org/seeksort/antarctic-news.svg?branch=master)](https://travis-ci.org/seeksort/antarctic-news)
+
 A news site for Antarctic residents. All the hot happenings around the continent!
 
 To start the server, run an instance of MongoDB on your machine (typically `mongod` on the command line) so that the app can write to the database. The app will also seed the database whenever the server is started. In a separate tab, run:
