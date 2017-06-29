@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import axios from 'axios';
@@ -19,6 +20,7 @@ class ArticleContainer extends Component {
     };
     this.delete = this.delete.bind(this);
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.setParent = this.setParent.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +34,14 @@ class ArticleContainer extends Component {
       last_edit_date: res.last_edit_date,
     }))
     .catch(error => new Error(error));
+  }
+
+  setParent(titleUpdate, bodyUpdate) {
+    this.setState({
+      title: titleUpdate,
+      body: bodyUpdate,
+    });
+    document.getElementById('current-article').style.backgroundColor = '#D7EADD';
   }
 
   delete() {
@@ -53,7 +63,7 @@ class ArticleContainer extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div id="current-article">
           <h3>{this.state.title}</h3>
           <h5>Original article date: {moment(this.state.create_date).format('llll z')}</h5>
           <h5>Last updated: {moment(this.state.last_edit_date).format('llll z')}</h5>
@@ -62,16 +72,21 @@ class ArticleContainer extends Component {
         <div>
           <Button text="Edit" onClick={this.toggleEditMode} />
           <Button text="Delete" color="#d32f2f" onClick={this.delete} />
+          <Link className="waves-effect waves-light btn" style={{ margin: '2px' }} to="/">
+          Back to Articles
+        </Link>
         </div>
         {this.state.editing_mode
           ? <EditArticleContainer
             articleId={queryString.parse(this.props.location.search)}
             title={this.state.title}
             body={this.state.body}
+            setParent={this.setParent}
             action="edit"
           />
           : <br />
         }
+        <br /><br />
       </div>
     );
   }

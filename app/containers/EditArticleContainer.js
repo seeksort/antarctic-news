@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -33,12 +32,14 @@ class EditArticleContainer extends Component {
       axios.post('/new-article', obj)
       .then((res) => {
         alert(res.data.message);
+        this.props.setParent(this.state.title, this.state.body);
       })
       .catch(error => new Error(error));
     } else if (this.props.title !== null) {
       axios.put(`/article/${this.props.articleId.id}`, obj)
       .then((res) => {
         alert(res.data.message);
+        this.props.setParent(this.state.title, this.state.body);
       })
       .catch(error => new Error(error));
     } else {
@@ -74,10 +75,6 @@ class EditArticleContainer extends Component {
             Submit
           </button>
         </form>
-        <br /><br />
-        <Link className="waves-effect waves-light btn" to="/">
-          Back to Articles
-        </Link>
       </div>
     );
   }
@@ -89,6 +86,7 @@ EditArticleContainer.propTypes = {
   articleId: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,
+  setParent: PropTypes.func.isRequired,
 };
 
 module.exports = EditArticleContainer;
