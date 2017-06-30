@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as helpers from './../utils/helpers';
 
@@ -57,6 +58,9 @@ class EditArticleContainer extends Component {
   render() {
     return (
       <div>
+        <Link className="waves-effect waves-light btn" style={{ margin: '2px' }} to="/">
+          Back to Articles
+        </Link>
         <form onSubmit={this.handleSubmit}>
           <label className="header" htmlFor="editor">Article Editor</label>
           <input
