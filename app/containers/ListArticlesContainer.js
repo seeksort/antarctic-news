@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import moment from 'moment';
 import ListItem from './../components/ListItem';
+import * as helpers from './../utils/helpers';
 
 class ListArticlesContainer extends Component {
   constructor(props) {
@@ -11,8 +11,7 @@ class ListArticlesContainer extends Component {
   }
 
   componentDidMount() {
-    axios.get('/articles')
-    .then(res => res.data)
+    helpers.getAllArticles()
     .then(res => this.setState({ articles: res }))
     .catch(error => new Error(error));
   }

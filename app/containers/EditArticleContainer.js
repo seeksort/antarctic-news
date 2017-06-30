@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
+import * as helpers from './../utils/helpers';
 
 class EditArticleContainer extends Component {
   constructor(props) {
@@ -23,27 +23,33 @@ class EditArticleContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const obj = {
-      title: this.state.title,
-      body: this.state.body,
-    };
-
-    if (this.props.title === undefined) {
-      axios.post('/new-article', obj)
-      .then((res) => {
-        alert(res.data.message);
-        this.props.setParent(this.state.title, this.state.body);
-      })
-      .catch(error => new Error(error));
-    } else if (this.props.title !== null) {
-      axios.put(`/article/${this.props.articleId.id}`, obj)
-      .then((res) => {
-        alert(res.data.message);
-        this.props.setParent(this.state.title, this.state.body);
-      })
-      .catch(error => new Error(error));
+    if (this.state.title === '') {
+      alert('Please include a title.');
+    } else if (this.state.body === '') {
+      alert('Please include an article body.');
     } else {
-      alert('An error occurred.');
+      const obj = {
+        title: this.state.title,
+        body: this.state.body,
+      };
+
+      if (this.props.title === undefined) {
+        helpers.postArticle(obj)
+        .then((res) => {
+          alert(res.message);
+          this.props.setParent(this.state.title, this.state.body);
+        })
+        .catch(error => new Error(error));
+      } else if (this.props.title !== null) {
+        helpers.updateArticle(this.props.articleId, obj)
+        .then((res) => {
+          alert(res.message);
+          this.props.setParent(this.state.title, this.state.body);
+        })
+        .catch(error => new Error(error));
+      } else {
+        alert('An error occurred.');
+      }
     }
     return 'done';
   }
@@ -81,12 +87,19 @@ class EditArticleContainer extends Component {
 }
 
 EditArticleContainer.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  body: PropTypes.string,
   articleId: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }).isRequired,
-  setParent: PropTypes.func.isRequired,
+    id: PropTypes.string,
+  }),
+  setParent: PropTypes.func,
+};
+
+EditArticleContainer.defaultProps = {
+  title: undefined,
+  body: undefined,
+  articleId: { id: undefined },
+  setParent: () => {},
 };
 
 module.exports = EditArticleContainer;
