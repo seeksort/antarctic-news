@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import moment from 'moment-timezone';
 import ListArticlesContainer from './../app/containers/ListArticlesContainer';
 
 // Unix dates

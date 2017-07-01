@@ -6,6 +6,9 @@ const router = require('./routes/api');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// To use test database uri
+process.env.NODE_ENV = 'test';
+
 // Activate logging, access public files, incorporate JSON body parser
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname + '/public')));
