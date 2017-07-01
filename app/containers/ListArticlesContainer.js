@@ -12,7 +12,7 @@ class ListArticlesContainer extends Component {
 
   componentDidMount() {
     helpers.getAllArticles()
-    .then(res => this.setState({ articles: res }))
+    .then(res => this.setState({ articles: res.data }))
     .catch(error => new Error(error));
   }
 
