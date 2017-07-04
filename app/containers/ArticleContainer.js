@@ -27,12 +27,12 @@ class ArticleContainer extends Component {
     const articleId = queryString.parse(this.props.location.search);
     helpers.getArticle(articleId)
     .then(res => this.setState({
-      title: res.title,
-      body: res.body,
-      create_date: res.create_date,
-      last_edit_date: res.last_edit_date,
+      title: res.data.title,
+      body: res.data.body,
+      create_date: res.data.create_date,
+      last_edit_date: res.data.last_edit_date,
     }))
-    .catch(error => new Error(error));
+    .catch(err => console.error(err));
   }
 
   setParent(titleUpdate, bodyUpdate) {
@@ -48,9 +48,9 @@ class ArticleContainer extends Component {
       const articleId = queryString.parse(this.props.location.search);
       helpers.deleteArticle(articleId)
       .then((res) => {
-        alert(res.message);
+        alert(res.data.message);
       })
-      .catch(error => new Error(error));
+      .catch(err => console.error(err));
     }
   }
 

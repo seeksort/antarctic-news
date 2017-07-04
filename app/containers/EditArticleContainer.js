@@ -37,17 +37,17 @@ class EditArticleContainer extends Component {
       if (this.props.title === undefined) {
         helpers.postArticle(obj)
         .then((res) => {
-          alert(res.message);
+          alert(res.data.message);
           this.props.setParent(this.state.title, this.state.body);
         })
-        .catch(error => new Error(error));
+        .catch(err => console.error(err));
       } else if (this.props.title !== null) {
         helpers.updateArticle(this.props.articleId, obj)
         .then((res) => {
-          alert(res.message);
+          alert(res.data.message);
           this.props.setParent(this.state.title, this.state.body);
         })
-        .catch(error => new Error(error));
+        .catch(err => console.error(err));
       } else {
         alert('An error occurred.');
       }
