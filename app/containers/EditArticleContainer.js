@@ -24,9 +24,9 @@ class EditArticleContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.title === '' || 'Article Title') {
+    if (this.state.title === '' || this.state.title === 'Article Title') {
       alert('Please include a title.');
-    } else if (this.state.body === '' || 'Add your article...') {
+    } else if (this.state.body === '' || this.state.body === 'Add your article...') {
       alert('Please include an article body.');
     } else {
       const obj = {

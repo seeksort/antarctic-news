@@ -6,8 +6,12 @@ const router = require('./routes/api');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Activate logging, access public files, incorporate JSON body parser
-app.use(morgan('dev'));
+// Only use logging in dev
+if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'prod') {
+  app.use(morgan('dev'));
+}
+
+// Access public files
 app.use(express.static(path.join(__dirname + '/public')));
 
 // Catch errors
