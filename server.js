@@ -6,9 +6,6 @@ const router = require('./routes/api');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// To use test database uri
-process.env.NODE_ENV = 'test';
-
 // Activate logging, access public files, incorporate JSON body parser
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname + '/public')));
@@ -24,7 +21,18 @@ router.get('/', (req, res) => {
 });
 
 // Routes
-require('./routes/db')(app); // For development; remove later
+require('./routes/db')(); // db routes
 app.use(router); // api routes
 
-app.listen(PORT, () => console.log(`Server now listening on port ${PORT}`));
+// To access Node HTTP method to close the server (native to the HTTP module, not Express)
+// https://github.com/expressjs/express/issues/1101
+const httpServer = require('http').createServer(app);
+
+// Only listen to port if not in test
+if (process.env.NODE_ENV !== 'test') {
+  httpServer.listen(PORT, () => {
+    console.log(`Server now listening on port ${PORT}`);
+  });
+}
+
+module.exports = httpServer;
