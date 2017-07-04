@@ -31,7 +31,7 @@ describe('Calls to API server', () => {
   test('returns one article', () => {
     expect.assertions(1);
     return request(httpServer).get(`/article/${articleId}`).then((res) => {
-      expect(res.body.body).toEqual('It\'s a test article!!');
+      expect(res.body).toHaveProperty('title');
     });
   });
   test('updates an article', () => {
