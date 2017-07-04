@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import ArticleContainer from './../app/containers/ArticleContainer';
@@ -36,13 +37,11 @@ describe('<ArticleContainer />', () => {
   });
 
   it('renders the original timestamp', () => {
-    expect(component.contains(<h5>Original article date: 
-      Tue, Jul 7, 2009 1:10 PM </h5>)).toBe(true);
+    expect(component.contains(<h5>Original article date: {moment(article.create_date).format('llll z')}</h5>)).toBe(true);
   });
 
   it('renders the last update timestamp', () => {
-    expect(component.contains(<h5>Last updated: 
-      Mon, May 1, 2017 12:43 AM </h5>)).toBe(true);
+    expect(component.contains(<h5>Last updated: {moment(article.last_edit_date).format('llll z')}</h5>)).toBe(true);
   });
 
   it('renders back to articles button', () => {
