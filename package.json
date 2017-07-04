@@ -11,7 +11,7 @@
     "start": "node server.js",
     "build": "webpack",
     "watch": "webpack -w",
-    "test": "jest",
+    "test": "NODE_ENV=test && jest --runInBand --verbose",
     "compile": "webpack",
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
@@ -54,6 +54,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "jest": "^20.0.1",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "supertest": "^3.0.0"
   }
 }

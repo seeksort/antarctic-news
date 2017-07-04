@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import axios from 'axios';
 import moment from 'moment';
 import Button from './../components/Button';
 import EditArticleContainer from './EditArticleContainer';
+import * as helpers from './../utils/helpers';
 
 class ArticleContainer extends Component {
   constructor(props) {
@@ -25,8 +25,7 @@ class ArticleContainer extends Component {
 
   componentDidMount() {
     const articleId = queryString.parse(this.props.location.search);
-    axios.get(`/article/${articleId.id}`)
-    .then(res => res.data)
+    helpers.getArticle(articleId)
     .then(res => this.setState({
       title: res.title,
       body: res.body,
@@ -47,10 +46,9 @@ class ArticleContainer extends Component {
   delete() {
     if (window.confirm('Do you want to delete this article?')) {
       const articleId = queryString.parse(this.props.location.search);
-      axios.delete(`/article/${articleId.id}`)
+      helpers.deleteArticle(articleId)
       .then((res) => {
-        alert(res.data.message);
-        return 'done';
+        alert(res.message);
       })
       .catch(error => new Error(error));
     }
@@ -72,9 +70,6 @@ class ArticleContainer extends Component {
         <div>
           <Button text="Edit" onClick={this.toggleEditMode} />
           <Button text="Delete" color="#d32f2f" onClick={this.delete} />
-          <Link className="waves-effect waves-light btn" style={{ margin: '2px' }} to="/">
-          Back to Articles
-        </Link>
         </div>
         {this.state.editing_mode
           ? <EditArticleContainer
@@ -84,7 +79,9 @@ class ArticleContainer extends Component {
             setParent={this.setParent}
             action="edit"
           />
-          : <br />
+          : <Link className="waves-effect waves-light btn" style={{ margin: '2px' }} to="/">
+              Back to Articles
+            </Link>
         }
         <br /><br />
       </div>
