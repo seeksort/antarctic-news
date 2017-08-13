@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -15,11 +16,8 @@ mongoose.Promise = Promise;
 // GET articles
 router.get('/articles', (req, res) => {
   Article.find({}, (err, articles) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(404);
-    } else if (articles.length < 1) {
-      res.json({ message: 'Error: There are no articles.' });
+    if (err || articles.length < 1) {
+      res.status(404).json({ message: 'Error: There are no articles.' });
     } else {
       res.json(articles);
     }
@@ -30,11 +28,8 @@ router.get('/articles', (req, res) => {
 router.get('/article/:id', (req, res) => {
   const query = { _id: ObjectId(req.params.id) };
   Article.findOne(query, (err, article) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(404);
-    } else if (article === null) {
-      res.json({ message: 'Error: Article not found.' });
+    if (err || article === null) {
+      res.status(404).json({ message: 'Error: Article not found.' });
     } else {
       res.json(article);
     }
@@ -48,12 +43,11 @@ router.post('/new-article', (req, res) => {
     title: req.body.title,
     body: req.body.body,
     create_date: timestamp,
-    last_edit_date: timestamp
+    last_edit_date: timestamp,
   });
-  newArticle.save((err, article) => {
+  newArticle.save((err) => {
     if (err) {
-      console.log(err);
-      res.sendStatus(404);
+      res.status(404).json({ message: 'Error: Could not save article.' });
     } else {
       res.json({ message: 'Success: Article saved.' });
     }
@@ -64,18 +58,13 @@ router.post('/new-article', (req, res) => {
 router.put('/article/:id', (req, res) => {
   const timestamp = Date.now();
   const query = { _id: ObjectId(req.params.id) };
-  const articleUpdate = {
-    $set: {
-      title: req.body.title,
-      body: req.body.body,
-      last_edit_date: timestamp
-    }
-  };
+  const articleUpdate = { $set: {
+    title: req.body.title,
+    body: req.body.body,
+    last_edit_date: timestamp,
+  } };
   Article.update(query, articleUpdate, (err, writeResult) => {
-    if (err) {
-      console.log(err);
-      res.sendStatus(404);
-    } else if (writeResult.nModified === 0) {
+    if (err || writeResult.nModified === 0) {
       res.json({ message: 'Error: No articles were updated.' });
     } else {
       res.json({ message: 'Success: Article updated.' });
@@ -85,12 +74,10 @@ router.put('/article/:id', (req, res) => {
 
 // DELETE an article
 router.delete('/article/:id', (req, res) => {
-  const timestamp = Date.now();
   const query = { _id: ObjectId(req.params.id) };
-  Article.remove(query, (err, article) => {
+  Article.remove(query, (err) => {
     if (err) {
-      console.log(err);
-      res.sendStatus(404);
+      res.status(404).json({ message: 'Error: Could not delete article.' });
     } else {
       res.json({ message: 'Success: Article deleted.' });
     }

@@ -14,7 +14,7 @@ describe('<ListArticlesContainer />', () => {
 
   beforeEach(() => {
     component = shallow(<ListArticlesContainer />);
-    component.setState({ articles: articles });
+    component.setState({ articles });
   });
 
   it('renders all subcomponents', () => {
