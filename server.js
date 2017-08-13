@@ -20,7 +20,7 @@ app.use('/', (err, req, res, next) => {
 });
 
 // Default Route
-router.get('/', (req, res) => {
+router.get('/*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 

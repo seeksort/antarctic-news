@@ -22,10 +22,20 @@ describe('<EditArticleContainer />', () => {
   });
 
   it('receives title prop', () => {
-    expect(component.instance().props.title).toBe('Getting Around Tokyo');
+    expect(component.instance().state.title).toBe('Getting Around Tokyo');
   });
 
   it('receives body prop', () => {
-    expect(component.instance().props.body).toBe('Tokyo is a city made for pedestrians, drivers, bicyclists, and train commuters!');
+    expect(component.instance().state.body).toBe('Tokyo is a city made for pedestrians, drivers, bicyclists, and train commuters!');
+  });
+
+  it('updates the title', () => {
+    component.instance().setState({ title: 'Journeys in Kyoto' });
+    expect(component.instance().state.title).toBe('Journeys in Kyoto');
+  });
+
+  it('updates the body', () => {
+    component.instance().setState({ title: 'Kyoto has historical temples, amazing bamboo groves, and opportunities to spot geisha!' });
+    expect(component.instance().state.title).toBe('Kyoto has historical temples, amazing bamboo groves, and opportunities to spot geisha!');
   });
 });
