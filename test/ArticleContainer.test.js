@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import ArticleContainer from './../app/containers/ArticleContainer';
 import EditArticleContainer from './../app/containers/EditArticleContainer';
 
