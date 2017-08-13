@@ -3,7 +3,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { shallow } from 'enzyme';
 import ArticleContainer from './../app/containers/ArticleContainer';
-import EditArticleContainer from './../app/containers/EditArticleContainer';
 
 // Unix dates
 const article = {
@@ -48,5 +47,10 @@ describe('<ArticleContainer />', () => {
     expect(component.contains(<Link
       className="waves-effect waves-light btn" replace={false} style={{ margin: '2px' }} to="/"
     >Back to Articles</Link>)).toBe(true);
+  });
+
+  it('renders edit component when button clicked', () => {
+    component.find('#editButton').simulate('click');
+    expect(component.find('EditArticleContainer')).toHaveLength(1);
   });
 });

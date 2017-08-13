@@ -68,8 +68,8 @@ class ArticleContainer extends Component {
           <p style={{ whiteSpace: 'pre-wrap' }}>{this.state.body}</p>
         </div>
         <div>
-          <Button text="Edit" onClick={this.toggleEditMode} />
-          <Button text="Delete" color="#d32f2f" onClick={this.delete} />
+          <Button text="Edit" id="editButton" onClick={this.toggleEditMode} />
+          <Button text="Delete" id="deleteButton" color="#d32f2f" onClick={this.delete} />
         </div>
         {this.state.editing_mode
           ? <EditArticleContainer
