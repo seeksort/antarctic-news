@@ -10,7 +10,7 @@ describe('Calls to API server', () => {
       mongoose.connection.close();
     });
   });
-  test('posts an article', () => {
+  it('posts an article', () => {
     expect.assertions(1);
     return request(httpServer)
       .post('/new-article')
@@ -20,7 +20,7 @@ describe('Calls to API server', () => {
         expect(res.statusCode).toBe(200);
       });
   });
-  test('returns all articles', () => {
+  it('returns all articles', () => {
     expect.assertions(1);
     return request(httpServer).get('/articles').then((res) => {
       // store one of the created IDs for remaining tests
@@ -28,13 +28,13 @@ describe('Calls to API server', () => {
       expect(res.body.length).toEqual(11);
     });
   });
-  test('returns one article', () => {
+  it('returns one article', () => {
     expect.assertions(1);
     return request(httpServer).get(`/article/${articleId}`).then((res) => {
       expect(res.body).toHaveProperty('title');
     });
   });
-  test('updates an article', () => {
+  it('updates an article', () => {
     expect.assertions(1);
     return request(httpServer)
       .put(`/article/${articleId}`)
@@ -44,7 +44,7 @@ describe('Calls to API server', () => {
         expect(res.body.message).toBe('Success: Article updated.');
       });
   });
-  test('deletes an article', () => {
+  it('deletes an article', () => {
     expect.assertions(1);
     return request(httpServer)
       .delete(`/article/${articleId}`)

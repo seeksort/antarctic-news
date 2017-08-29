@@ -21,12 +21,8 @@ describe('<EditArticleContainer />', () => {
     />);
   });
 
-  it('receives title prop', () => {
-    expect(component.instance().state.title).toBe('Getting Around Tokyo');
-  });
-
-  it('receives body prop', () => {
-    expect(component.instance().state.body).toBe('Tokyo is a city made for pedestrians, drivers, bicyclists, and train commuters!');
+  it('renders correctly', () => {
+    expect(component).toMatchSnapshot();
   });
 
   it('updates the title', () => {

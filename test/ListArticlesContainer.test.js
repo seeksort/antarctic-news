@@ -17,19 +17,11 @@ describe('<ListArticlesContainer />', () => {
     component.setState({ articles });
   });
 
+  it('renders correctly', () => {
+    expect(component).toMatchSnapshot();
+  });
+
   it('renders all subcomponents', () => {
     expect(component.find('.article')).toHaveLength(3);
-  });
-
-  it('renders each subcomponent with correct title', () => {
-    component.find('.article').forEach((node, index) => {
-      expect(node.get(0).props.children.props).toHaveProperty('title', articles[index].title);
-    });
-  });
-
-  it('renders each subcomponent with correct date', () => {
-    component.find('.article').forEach((node, index) => {
-      expect(node.get(0).props.children.props).toHaveProperty('id', articles[index]._id);
-    });
   });
 });
