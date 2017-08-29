@@ -11,7 +11,7 @@
     "start": "node server.js",
     "build": "webpack",
     "watch": "webpack -w",
-    "test": "NODE_ENV=test && jest --verbose",
+    "test": "NODE_ENV=test && jest --updateSnapshot --verbose",
     "compile": "webpack",
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },

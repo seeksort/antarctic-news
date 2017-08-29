@@ -1,15 +1,15 @@
+import { shallow } from 'enzyme';
 import React from 'react';
 import ListItem from './../app/components/ListItem';
-import {shallow} from 'enzyme';
 
 describe('<ListItem />', () => {
-  test('renders the component', () => {
+  it('renders correctly', () => {
     const component = shallow(
       <ListItem
-        title='List Title'
-        date='May 13, 2017'
-      />
+        title="List Title"
+        date="May 13, 2017"
+      />,
     );
-    expect(component.hasClass('article')).toEqual(true);
+    expect(component).toMatchSnapshot();
   });
 });
